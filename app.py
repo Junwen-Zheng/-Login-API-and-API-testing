@@ -13,4 +13,18 @@ users = {
     "admin": "root",
 }
 
+@auth.get_password
+def get_pw(username):
+    if username in users:
+        return users.get(username)
+    return None
+
+@app.route('/secret')
+@auth.login_required
+def secret_page():
+    return Response("Hello, %s!" % auth.username(), 201, mimetype='application/json')
+
+@app.route('/')
+def root_test():
+    return 'index'
 
