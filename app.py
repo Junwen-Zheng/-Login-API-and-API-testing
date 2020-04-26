@@ -28,3 +28,11 @@ def secret_page():
 def root_test():
     return 'index'
 
+@app.route('/user', methods=['GET'])
+def get_users():
+	return dumps(users)	
+
+@app.route('/user/<string:username>', methods=['GET'])
+def get_profile(username):
+	return username + " profile"
+
