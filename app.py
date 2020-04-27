@@ -36,3 +36,8 @@ def get_users():
 def get_profile(username):
 	return username + " profile"
 
+@app.route('/user/<string:username>', methods=['POST'])
+def add_user(username):
+	users[username] = request.form['pwd']
+	resp = Response(dumps(username), status=200, mimetype='application/json')
+	return resp
