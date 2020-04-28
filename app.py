@@ -41,3 +41,17 @@ def add_user(username):
 	users[username] = request.form['pwd']
 	resp = Response(dumps(username), status=200, mimetype='application/json')
 	return resp
+
+@app.route('/user/<string:username>/pwd', methods=['PUT'])
+def change_password(username):
+	resp = Response("Pasword changed" , status=200, mimetype='application/json')
+	if not users.has_key(username):
+		resp = Response("User " + username + " not found!" , status=403, mimetype='application/json')
+	else:
+		users[username] = request.form['pwd']
+
+	return resp
+
+if __name__ == '__main__':
+    app.run()
+
