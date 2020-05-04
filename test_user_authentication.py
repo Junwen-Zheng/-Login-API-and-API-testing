@@ -12,3 +12,7 @@ class TestAuthenticationRestApi(unittest.TestCase):
 		r = requests.get(self.__api_base_url + self.__secret_url, auth=('user', 'pass'))
 		self.assertEqual(r.status_code, 401)
 
+	def test_authentication_default_user(self):
+		r = requests.get(self.__api_base_url + self.__secret_url, auth=('admin', 'root'))
+		self.assertEqual(r.status_code, 201)
+
