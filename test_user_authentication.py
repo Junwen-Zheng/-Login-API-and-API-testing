@@ -16,3 +16,9 @@ class TestAuthenticationRestApi(unittest.TestCase):
 		r = requests.get(self.__api_base_url + self.__secret_url, auth=('admin', 'root'))
 		self.assertEqual(r.status_code, 201)
 
+	def test_user_add(self):
+		payload = {'pwd': '123456789'}
+		user = '/test_user'
+		r = requests.post(self.__api_base_url + self.__user_url + user, data=payload)
+		self.assertEqual(r.status_code, 200)
+
