@@ -36,3 +36,16 @@ class TestAuthenticationRestApi(unittest.TestCase):
 		r = requests.post(self.__api_base_url + self.__user_url + user + pwd_url, data=payload)
 		self.assertEqual(r.status_code, 405)
 
+	def test_change_password_invalid_user(self):
+		payload = {'pwd': 'test'}
+		user = '/test2'
+		pwd_url = '/pwd'
+		r = requests.put(self.__api_base_url + self.__user_url + user + pwd_url, data=payload)
+		self.assertEqual(r.status_code, 403)
+	
+	def test_get_user_collection(self):
+		self.test_user_add()
+		r = requests.get(self.__api_base_url + self.__user_url)
+		users = r.json()
+		self.assertEqual(users.has_key('test_user'), True)
+
