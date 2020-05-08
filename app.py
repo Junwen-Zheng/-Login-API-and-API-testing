@@ -52,6 +52,7 @@ def change_password(username):
 
 	return resp
 
+
 if __name__ == '__main__':
     app.run()
 
